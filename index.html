@@ -1,225 +1,1268 @@
+
 <!DOCTYPE html>
 <html lang="id">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="theme-color" content="#171717">
 <title>A Little Space for Okyy Jelly Drink ♡</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Caveat:wght@400;500;600&display=swap" rel="stylesheet">
+
 <style>
-@import url('https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:ital,wght@0,500;0,600;0,700;1,500;1,600&family=Caveat:wght@500;600&display=swap');
-:root{--ink:#202020;--paper:#f3f0e9;--paper2:#e9e5dc;--muted:#77736d;--line:#d5d0c6;--white:#fffdf8}
-*{box-sizing:border-box}
-html{scroll-behavior:smooth}
-body{margin:0;background:#171717;color:var(--ink);font-family:'DM Sans',sans-serif;overflow:hidden}
-button{font:inherit}
-#app{min-height:100svh;position:relative}
-.grain{position:fixed;inset:-50%;pointer-events:none;z-index:20;opacity:.12;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 180 180' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.42'/%3E%3C/svg%3E");animation:grain .22s steps(2) infinite}
-@keyframes grain{0%{transform:translate(0,0)}25%{transform:translate(2%,-1%)}50%{transform:translate(-1%,2%)}75%{transform:translate(1%,1%)}100%{transform:translate(-2%,-1%)}}
-.screen{display:none;min-height:100svh;padding:28px 20px 34px;align-items:center;justify-content:center;background:var(--paper);position:absolute;inset:0;overflow:auto}
-.screen.active{display:flex;animation:pageIn .75s ease both}
-.screen.leaving{animation:pageOut .42s ease both}
-@keyframes pageIn{0%{opacity:0;filter:brightness(.3);transform:translateY(8px)}35%{opacity:.5;filter:brightness(.65)}100%{opacity:1;filter:brightness(1);transform:none}}
-@keyframes pageOut{to{opacity:0;filter:brightness(.25);transform:scale(1.015)}}
-.frame{width:min(100%,900px);min-height:min(760px,calc(100svh - 56px));border:1px solid var(--line);background:var(--white);position:relative;padding:clamp(22px,5vw,54px);box-shadow:0 18px 70px #00000012;overflow:hidden}
-.frame:before{content:"";position:absolute;inset:10px;border:1px solid #e7e2d9;pointer-events:none}
-.topline{display:flex;justify-content:space-between;gap:12px;align-items:center;font:10px 'DM Mono',monospace;letter-spacing:.16em;color:var(--muted);text-transform:uppercase;position:relative;z-index:1}
-.dot{display:inline-block;width:6px;height:6px;border-radius:50%;background:var(--ink);margin-right:7px}
-h1,h2,p{margin-top:0}
-h1,h2{font-family:'Playfair Display',serif;font-weight:500}
-h1{font-size:clamp(2.6rem,7vw,5.4rem);line-height:1.02;letter-spacing:-.045em}
-h2{font-size:clamp(2rem,5vw,3.6rem);line-height:1.08;letter-spacing:-.035em}
-p{font-size:clamp(.96rem,1.5vw,1.08rem);line-height:1.85;color:#4f4b46}
-.eyebrow{font:10px 'DM Mono',monospace;letter-spacing:.2em;color:var(--muted);text-transform:uppercase}
-.script{font:clamp(1.35rem,3vw,2rem) 'Caveat',cursive;color:#555}
-.btn{border:1px solid var(--ink);background:var(--ink);color:var(--white);padding:14px 22px;letter-spacing:.12em;font:11px 'DM Mono',monospace;cursor:pointer;transition:.25s;display:inline-flex;gap:14px;align-items:center}
-.btn:hover{background:transparent;color:var(--ink);transform:translateY(-2px)}
-.btn.light{background:transparent;color:var(--ink)}
-.btn.light:hover{background:var(--ink);color:var(--white)}
-.center{text-align:center}
-.cover{background:#171717;color:var(--paper);text-align:center}
-.cover .frame{background:#1b1b1b;border-color:#57534e;color:var(--paper);display:flex;flex-direction:column;justify-content:center;align-items:center;min-height:min(760px,calc(100svh - 56px));}
-.cover .frame:before{border-color:#46423e}
-.cover h1{max-width:760px;margin:24px auto 18px}
-.cover p{color:#c4c0b8;max-width:440px;margin:0 auto 30px}
-.cover .eyebrow{color:#aaa49b}
-.cover .btn{background:var(--paper);color:#1b1b1b;border-color:var(--paper)}
-.cover .btn:hover{background:transparent;color:var(--paper)}
-.cover-mark{font:12px 'DM Mono',monospace;letter-spacing:.28em;border:1px solid #77716a;border-radius:50%;width:68px;height:68px;display:grid;place-items:center}
-.cover-bottom{position:absolute;bottom:34px;left:0;right:0;color:#aaa49b;font:9px 'DM Mono',monospace;letter-spacing:.18em}
-.intro-grid{display:grid;grid-template-columns:1fr .9fr;gap:30px;align-items:center;max-width:740px;margin:55px auto 34px;position:relative;z-index:1}
-.intro-grid h2{font-size:clamp(2.4rem,5vw,4.2rem);margin:12px 0}
-.intro-copy{max-width:430px}
-.sticker{background:#eeece6;border:1px solid #d6d1c8;padding:12px 12px 30px;transform:rotate(3deg);width:min(100%,285px);margin:auto;box-shadow:0 12px 25px #00000012}
-.chibi{height:235px;background:#dedbd4;display:flex;align-items:center;justify-content:center;position:relative;overflow:hidden}
-.chibi:before,.chibi:after{content:"♡";position:absolute;font:35px Georgia;color:#777;top:20px}
-.chibi:before{left:20px;transform:rotate(-15deg)}.chibi:after{right:20px;top:auto;bottom:22px}
-.person{position:relative;width:86px;height:140px;margin:0 7px;display:flex;align-items:center;flex-direction:column}
-.head{width:65px;height:68px;background:#f8f7f3;border:2px solid #242424;border-radius:48% 48% 45% 45%;position:relative;z-index:2}
-.head:before{content:"";position:absolute;top:-7px;left:4px;width:55px;height:24px;background:#222;border-radius:70% 55% 25% 20%;transform:rotate(-8deg)}
-.head:after{content:"•  •";white-space:pre;position:absolute;top:29px;left:15px;font:15px Arial;letter-spacing:5px}
-.body{width:72px;height:75px;margin-top:-3px;border:2px solid #222;background:#f8f7f3;border-radius:28px 28px 10px 10px}
-.person.girl .head:before{height:42px;width:68px;left:-3px;border-radius:60% 60% 30% 30%}
-.person.girl .body{background:#777}
-.caption{font:12px 'Caveat',cursive;text-align:center;margin-top:9px;color:#555}
-.intro-copy p{margin-bottom:15px}
-.intro-copy .lead{font:clamp(1.3rem,3vw,1.8rem) 'Caveat',cursive;color:#34312d}
-.footer-nav{display:flex;justify-content:space-between;align-items:center;gap:12px;margin-top:28px;position:relative;z-index:1}
-.page-count{font:10px 'DM Mono',monospace;letter-spacing:.12em;color:#888}
-.letter{max-width:680px;margin:38px auto 0;position:relative;z-index:1}
-.letter h2{max-width:650px;margin:12px 0 25px}
-.letter .opening{font:clamp(1.25rem,3vw,1.8rem) 'Caveat',cursive;color:#444}
-.letter p{margin-bottom:17px}
-.quote{font:italic clamp(1.25rem,3vw,1.8rem) 'Playfair Display',serif;text-align:center;padding:22px 12px;border-top:1px solid var(--line);border-bottom:1px solid var(--line);margin:25px 0;color:#333}
-.note{background:#eeece6;border-left:3px solid #777;padding:15px 18px;margin:22px 0;font:clamp(1.15rem,2.5vw,1.55rem) 'Caveat',cursive;color:#383532}
-.end-card{max-width:650px;margin:55px auto 20px;text-align:center;position:relative;z-index:1}
-.end-card .big{font:clamp(2.1rem,6vw,4.4rem) 'Playfair Display',serif;line-height:1.12;margin:25px 0}
-.end-card .signature{font:1.5rem 'Caveat',cursive;margin-top:28px}
-.doodle{position:absolute;font:24px Georgia;color:#aaa;opacity:.55}
-.d1{top:22%;right:8%}.d2{bottom:18%;left:8%}.d3{top:48%;left:4%}
-@media(max-width:650px){
- .screen{padding:12px}.frame{padding:26px 22px;min-height:calc(100svh - 24px)}
- .intro-grid{grid-template-columns:1fr;gap:25px;margin:32px auto 20px}
- .sticker{width:220px}.chibi{height:185px}
- .intro-copy{order:2}.sticker{order:1}
- .footer-nav{margin-top:20px}.topline{font-size:8px}
+:root {
+  --black: #171717;
+  --dark: #292929;
+  --grey: #777;
+  --paper: #f5f3ee;
+  --white: #fff;
+  --line: #d8d5ce;
 }
-@media(prefers-reduced-motion:reduce){*,*:before,*:after{animation-duration:.01ms!important;transition-duration:.01ms!important;scroll-behavior:auto!important}}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background: #171717;
+  color: var(--black);
+  font-family: 'DM Sans', sans-serif;
+  overflow: hidden;
+}
+
+button {
+  font: inherit;
+}
+
+.grain {
+  position: fixed;
+  inset: 0;
+  z-index: 100;
+  pointer-events: none;
+  opacity: .13;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 180 180' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.35'/%3E%3C/svg%3E");
+}
+
+.screen {
+  position: fixed;
+  inset: 0;
+  display: none;
+  overflow-y: auto;
+  overflow-x: hidden;
+  padding: 45px 20px;
+  justify-content: center;
+  align-items: flex-start;
+  background: var(--paper);
+  opacity: 0;
+  transition: opacity .65s ease;
+  scrollbar-width: thin;
+  scrollbar-color: #aaa transparent;
+}
+
+.screen.active {
+  display: flex;
+  opacity: 1;
+}
+
+.screen-inner {
+  width: 100%;
+  max-width: 920px;
+  margin: auto;
+  flex-shrink: 0;
+}
+
+.paper {
+  background:
+    radial-gradient(ellipse at 20% 10%, rgba(0,0,0,.035), transparent 35%),
+    radial-gradient(ellipse at 90% 90%, rgba(0,0,0,.035), transparent 35%),
+    #f8f7f3;
+  border: 1px solid #e4e0d8;
+  box-shadow: 0 15px 55px rgba(0,0,0,.12);
+  position: relative;
+}
+
+.eyebrow {
+  font-family: 'DM Mono', monospace;
+  font-size: 10px;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  color: #888;
+}
+
+.serif {
+  font-family: 'Playfair Display', serif;
+}
+
+.hand {
+  font-family: 'Caveat', cursive;
+}
+
+h1, h2, h3 {
+  font-family: 'Playfair Display', serif;
+  font-weight: 400;
+}
+
+.divider {
+  width: 55px;
+  height: 1px;
+  background: #aaa;
+  margin: 22px auto;
+}
+
+.nav-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  border: 1px solid var(--black);
+  background: var(--black);
+  color: white;
+  padding: 13px 23px;
+  font-family: 'DM Mono', monospace;
+  font-size: 10px;
+  letter-spacing: 1.5px;
+  cursor: pointer;
+  transition: .3s;
+}
+
+.nav-button:hover {
+  background: transparent;
+  color: var(--black);
+  transform: translateY(-3px);
+}
+
+.back-button {
+  background: transparent;
+  color: var(--black);
+  border: 1px solid #aaa;
+}
+
+.back-button:hover {
+  background: var(--black);
+  color: white;
+}
+
+/* OPENING */
+
+#opening {
+  background:
+    radial-gradient(circle at center, #343434, #151515 75%);
+  color: white;
+  text-align: center;
+}
+
+.opening-content {
+  max-width: 650px;
+  padding: 50px 20px;
+}
+
+.opening-star {
+  font-size: 32px;
+  margin-bottom: 35px;
+  animation: float 3s ease-in-out infinite;
+}
+
+.opening-content .eyebrow {
+  color: #aaa;
+  margin-bottom: 22px;
+}
+
+.opening-content h1 {
+  font-size: clamp(38px, 7vw, 70px);
+  line-height: 1.15;
+  font-style: italic;
+}
+
+.opening-content p {
+  color: #c0c0c0;
+  font-size: 13px;
+  line-height: 1.9;
+  max-width: 400px;
+  margin: 25px auto 35px;
+}
+
+.opening-content .nav-button {
+  background: white;
+  color: black;
+  border-color: white;
+}
+
+.opening-content .nav-button:hover {
+  background: transparent;
+  color: white;
+}
+
+.opening-bottom {
+  color: #777;
+  font-family: 'DM Mono', monospace;
+  font-size: 9px;
+  letter-spacing: 2px;
+  margin-top: 60px;
+}
+
+/* GENERAL CHAPTER */
+
+.chapter {
+  padding: 48px 55px;
+}
+
+.chapter-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 15px;
+  border-bottom: 1px solid var(--line);
+  padding-bottom: 17px;
+  margin-bottom: 35px;
+}
+
+.chapter-number {
+  font-family: 'DM Mono', monospace;
+  font-size: 10px;
+  letter-spacing: 2px;
+  color: #888;
+}
+
+.chapter-label {
+  font-family: 'DM Mono', monospace;
+  font-size: 9px;
+  letter-spacing: 2px;
+  color: #999;
+}
+
+.chapter-title {
+  font-size: clamp(29px, 5vw, 43px);
+  line-height: 1.2;
+  margin-bottom: 15px;
+}
+
+.chapter-subtitle {
+  font-size: 12px;
+  color: #888;
+  letter-spacing: .5px;
+}
+
+.chapter-footer {
+  border-top: 1px solid var(--line);
+  margin-top: 40px;
+  padding-top: 23px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 15px;
+  flex-wrap: wrap;
+}
+
+.footer-note {
+  font-family: 'DM Mono', monospace;
+  color: #999;
+  font-size: 9px;
+  letter-spacing: 1px;
+}
+
+/* PAGE 1 */
+
+.intro-layout {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 35px;
+  align-items: center;
+  margin-top: 35px;
+}
+
+.intro-copy p {
+  font-size: 14px;
+  line-height: 2;
+  margin-bottom: 16px;
+  color: #4d4d4d;
+}
+
+.intro-copy .hello {
+  font-family: 'Caveat', cursive;
+  font-size: 31px;
+  color: var(--black);
+  margin-bottom: 8px;
+}
+
+.illustration-card {
+  background: #e9e7e1;
+  padding: 18px;
+  transform: rotate(2deg);
+  box-shadow: 4px 6px 0 #d4d1c9;
+  position: relative;
+}
+
+.illustration-card::before {
+  content: '';
+  position: absolute;
+  width: 75px;
+  height: 19px;
+  background: rgba(255,255,255,.6);
+  top: -8px;
+  left: calc(50% - 37px);
+  transform: rotate(-4deg);
+  z-index: 2;
+}
+
+.illustration-art {
+  min-height: 270px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #f8f7f3;
+  overflow: hidden;
+  position: relative;
+}
+
+.couple {
+  display: flex;
+  align-items: flex-end;
+  gap: 15px;
+  position: relative;
+}
+
+.person {
+  width: 90px;
+  height: 155px;
+  position: relative;
+}
+
+.person .head {
+  width: 75px;
+  height: 75px;
+  background: #fff;
+  border: 3px solid #222;
+  border-radius: 48% 48% 45% 45%;
+  position: absolute;
+  top: 0;
+  left: 7px;
+  z-index: 2;
+}
+
+.person .hair {
+  position: absolute;
+  background: #222;
+  width: 78px;
+  height: 38px;
+  top: -3px;
+  left: 6px;
+  border-radius: 50% 50% 20% 20%;
+  z-index: 3;
+}
+
+.person .body {
+  position: absolute;
+  width: 85px;
+  height: 80px;
+  bottom: 0;
+  left: 2px;
+  border: 3px solid #222;
+  border-radius: 30px 30px 8px 8px;
+  background: #555;
+}
+
+.person.girl .hair {
+  height: 65px;
+  border-radius: 48% 48% 30% 30%;
+  background: #222;
+}
+
+.person.girl .hair::after {
+  content: '';
+  position: absolute;
+  width: 22px;
+  height: 65px;
+  right: -5px;
+  top: 20px;
+  border-radius: 20px;
+  background: #222;
+}
+
+.person.boy .body {
+  background: #e3e1dc;
+}
+
+.eye {
+  position: absolute;
+  width: 5px;
+  height: 7px;
+  background: #222;
+  border-radius: 50%;
+  top: 38px;
+  left: 23px;
+  z-index: 4;
+}
+
+.eye.right {
+  left: 48px;
+}
+
+.smile {
+  position: absolute;
+  width: 14px;
+  height: 7px;
+  border-bottom: 2px solid #222;
+  border-radius: 50%;
+  left: 33px;
+  top: 53px;
+  z-index: 4;
+}
+
+.doodle {
+  position: absolute;
+  color: #888;
+  font-size: 23px;
+}
+
+.doodle.one { top: 25px; left: 25px; }
+.doodle.two { right: 25px; top: 60px; }
+.doodle.three { bottom: 20px; right: 30px; }
+
+.polaroid-caption {
+  text-align: center;
+  font-family: 'Caveat', cursive;
+  font-size: 19px;
+  padding-top: 12px;
+  color: #555;
+}
+
+/* PAGE 2 */
+
+.confession {
+  margin-top: 30px;
+  display: grid;
+  grid-template-columns: 1.15fr .85fr;
+  gap: 35px;
+  align-items: center;
+}
+
+.confession-copy p {
+  font-size: 14px;
+  line-height: 2.05;
+  color: #4c4c4c;
+  margin-bottom: 17px;
+}
+
+.confession-copy .big-confession {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(30px, 5vw, 44px);
+  font-style: italic;
+  color: #171717;
+  line-height: 1.3;
+  margin: 18px 0;
+}
+
+.scrap-photo {
+  background: #fff;
+  padding: 13px 13px 40px;
+  box-shadow: 0 5px 20px rgba(0,0,0,.12);
+  transform: rotate(-3deg);
+}
+
+.scrap-photo .photo-art {
+  height: 235px;
+  background:
+    radial-gradient(circle at 50% 35%, #eee, #d6d4cf);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 65px;
+  filter: grayscale(1);
+}
+
+.scrap-photo p {
+  font-family: 'Caveat', cursive;
+  font-size: 20px;
+  text-align: center;
+  margin-top: 10px;
+}
+
+.tiny-note {
+  background: #e9e6de;
+  padding: 17px 20px;
+  margin-top: 25px;
+  border-left: 3px solid #999;
+  font-family: 'Caveat', cursive;
+  font-size: 22px;
+  transform: rotate(-1deg);
+}
+
+/* PAGE 3 */
+
+.letter {
+  max-width: 720px;
+  margin: 32px auto 0;
+  padding: 35px;
+  background: rgba(255,255,255,.55);
+  border: 1px solid #e6e3dc;
+  position: relative;
+}
+
+.letter::before {
+  content: 'A LETTER FOR YOU';
+  position: absolute;
+  right: 20px;
+  top: -10px;
+  background: #e4e1d9;
+  padding: 5px 13px;
+  font-family: 'DM Mono', monospace;
+  font-size: 9px;
+  letter-spacing: 2px;
+  color: #666;
+}
+
+.letter-quote {
+  font-family: 'Playfair Display', serif;
+  font-style: italic;
+  font-size: 23px;
+  line-height: 1.6;
+  text-align: center;
+  max-width: 550px;
+  margin: 0 auto 28px;
+}
+
+.letter p {
+  font-size: 13px;
+  line-height: 2.15;
+  color: #555;
+  margin-bottom: 17px;
+}
+
+.letter p:last-child {
+  margin-bottom: 0;
+}
+
+.highlight-paragraph {
+  background: #eae7df;
+  padding: 15px 18px;
+  border-left: 2px solid #888;
+}
+
+.letter-sign {
+  text-align: right;
+  font-family: 'Caveat', cursive;
+  font-size: 24px;
+  margin-top: 25px;
+}
+
+/* PAGE 4 */
+
+.comfort-layout {
+  display: grid;
+  grid-template-columns: 1fr .75fr;
+  gap: 30px;
+  align-items: start;
+  margin-top: 30px;
+}
+
+.comfort-copy p {
+  font-size: 13px;
+  line-height: 2.1;
+  color: #555;
+  margin-bottom: 16px;
+}
+
+.comfort-visual {
+  position: sticky;
+  top: 20px;
+}
+
+.comfort-illustration {
+  min-height: 230px;
+  background: #e7e5df;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 75px;
+  border: 1px solid #d4d1c9;
+  filter: grayscale(1);
+}
+
+.comfort-caption {
+  background: white;
+  border: 1px solid #ddd;
+  padding: 15px;
+  text-align: center;
+  font-family: 'Caveat', cursive;
+  font-size: 21px;
+}
+
+.reminder {
+  padding: 23px;
+  background: #e8e5dd;
+  margin-top: 25px;
+  text-align: center;
+}
+
+.reminder .reminder-title {
+  font-family: 'DM Mono', monospace;
+  font-size: 9px;
+  letter-spacing: 2px;
+  color: #777;
+  margin-bottom: 10px;
+}
+
+.reminder h3 {
+  font-family: 'Playfair Display', serif;
+  font-size: 27px;
+  letter-spacing: 2px;
+}
+
+.reminder p {
+  font-family: 'Caveat', cursive;
+  font-size: 21px;
+  line-height: 1.5;
+  margin-top: 10px;
+}
+
+/* PAGE 5 */
+
+.final-content {
+  text-align: center;
+  max-width: 700px;
+  margin: 0 auto;
+}
+
+.final-quote {
+  font-family: 'Playfair Display', serif;
+  font-size: 23px;
+  font-style: italic;
+  line-height: 1.6;
+  margin: 35px auto 25px;
+}
+
+.final-content p {
+  font-size: 13px;
+  color: #555;
+  line-height: 2.1;
+  margin-bottom: 17px;
+  text-align: left;
+}
+
+.final-message {
+  background: #242424;
+  color: white;
+  padding: 38px 20px;
+  margin: 35px 0;
+  position: relative;
+}
+
+.final-message::before,
+.final-message::after {
+  content: '✦';
+  color: #aaa;
+  position: absolute;
+  font-size: 20px;
+}
+
+.final-message::before {
+  top: 15px;
+  left: 20px;
+}
+
+.final-message::after {
+  bottom: 15px;
+  right: 20px;
+}
+
+.final-message h2 {
+  font-size: clamp(30px, 6vw, 48px);
+  line-height: 1.35;
+  font-style: italic;
+}
+
+.final-message .always {
+  font-family: 'DM Mono', monospace;
+  font-size: 13px;
+  letter-spacing: 3px;
+  margin-top: 15px;
+  color: #ccc;
+}
+
+.signature {
+  font-family: 'Caveat', cursive;
+  font-size: 25px;
+  line-height: 1.5;
+  margin: 25px 0;
+}
+
+.last-line {
+  font-family: 'DM Mono', monospace;
+  font-size: 10px;
+  letter-spacing: 2px;
+  margin: 30px 0;
+  color: #777;
+}
+
+/* TRANSITION */
+
+#transition {
+  position: fixed;
+  inset: 0;
+  background: #111;
+  z-index: 200;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity .35s ease;
+}
+
+#transition.show {
+  opacity: 1;
+}
+
+/* RESPONSIVE */
+
+@media (max-width: 650px) {
+  .screen {
+    padding: 18px 12px;
+    justify-content: flex-start;
+  }
+
+  .screen-inner {
+    margin: auto 0;
+  }
+
+  .chapter {
+    padding: 28px 21px;
+  }
+
+  .chapter-top {
+    margin-bottom: 25px;
+  }
+
+  .chapter-title {
+    font-size: 31px;
+  }
+
+  .intro-layout,
+  .confession,
+  .comfort-layout {
+    grid-template-columns: 1fr;
+    gap: 25px;
+  }
+
+  .intro-layout {
+    margin-top: 25px;
+  }
+
+  .illustration-art {
+    min-height: 230px;
+  }
+
+  .letter {
+    padding: 28px 20px;
+  }
+
+  .letter-quote {
+    font-size: 20px;
+  }
+
+  .comfort-visual {
+    position: relative;
+    top: auto;
+    max-width: 300px;
+    margin: 0 auto;
+    width: 100%;
+  }
+
+  .chapter-footer {
+    align-items: flex-start;
+  }
+
+  .chapter-footer .nav-button {
+    width: 100%;
+  }
+
+  .final-quote {
+    font-size: 20px;
+  }
+
+  .opening-content h1 {
+    font-size: 42px;
+  }
+}
+
+@media (max-width: 380px) {
+  .chapter {
+    padding: 24px 16px;
+  }
+
+  .chapter-title {
+    font-size: 27px;
+  }
+
+  .chapter-label {
+    font-size: 8px;
+  }
+}
 </style>
 </head>
+
 <body>
-<div id="app">
+
 <div class="grain"></div>
+<div id="transition"></div>
 
-<section class="screen cover active" data-page="0">
- <div class="frame">
-  <div class="cover-mark">♡</div>
-  <div class="eyebrow" style="margin-top:28px">A LITTLE SPACE MADE JUST FOR YOU</div>
-  <h1>To someone<br><em>who means a little more.</em></h1>
-  <p>A tiny corner of the internet, made with a lot of thought and a little bit of courage.</p>
-  <button class="btn" onclick="go(1)">OPEN THIS LITTLE SPACE <span>→</span></button>
-  <div class="cover-bottom">MADE WITH CARE · JUST FOR OKYY JELLY DRINK</div>
- </div>
-</section>
+<!-- OPENING -->
+<section class="screen active" id="opening">
+  <div class="screen-inner opening-content">
+    <div class="opening-star">✦</div>
+    <div class="eyebrow">A SMALL CORNER OF THE INTERNET</div>
 
-<section class="screen" data-page="1">
- <div class="frame">
-  <div class="topline"><span><i class="dot"></i>CHAPTER 01</span><span>A LITTLE INTRODUCTION</span></div>
-  <div class="intro-grid">
-   <div class="intro-copy">
-    <div class="eyebrow">HEY, YOU!</div>
-    <h2>Hiiii,<br>Okyy Jelly Drink!</h2>
-    <p class="lead">Welcome to my little website ♡</p>
-    <p>Don't worry, this isn't an assignment. You don't have to think too hard, and there's no deadline either. Just sit back, relax, and enjoy this little thing I've made for you.</p>
-    <p>Soo... are you ready to explore? I hope you like it!</p>
-   </div>
-   <div class="sticker">
-    <div class="chibi" aria-label="A simple monochrome chibi-style illustration of two people">
-     <div class="person girl"><div class="head"></div><div class="body"></div></div>
-     <div class="person"><div class="head"></div><div class="body"></div></div>
+    <h1>To someone<br>who means a little more.</h1>
+
+    <div class="divider" style="background:#777"></div>
+
+    <p>
+      A tiny corner of the internet, made with a lot of thought
+      and a little bit of courage.
+    </p>
+
+    <button class="nav-button" onclick="goTo('page1')">
+      OPEN THIS LITTLE SPACE →
+    </button>
+
+    <div class="opening-bottom">
+      MADE WITH A LITTLE EXTRA CARE · ♡
     </div>
-    <div class="caption">a little moment, just for us ♡</div>
-   </div>
   </div>
-  <div class="footer-nav"><span class="page-count">01 / 05</span><button class="btn" onclick="go(2)">LET'S EXPLORE! →</button></div>
-  <span class="doodle d1">✧</span><span class="doodle d2">♡</span>
- </div>
 </section>
 
-<section class="screen" data-page="2">
- <div class="frame">
-  <div class="topline"><span><i class="dot"></i>CHAPTER 02</span><span>A LITTLE CONFESSION</span></div>
-  <article class="letter">
-   <div class="eyebrow">A NOTE FROM ME TO YOU</div>
-   <h2>A Little Thing I Want You to Know</h2>
-   <p class="opening">“Jadi… ada sesuatu yang ingin aku kasih tahu.”</p>
-   <p><strong>Aku suka sama kamu.</strong></p>
-   <p>Kaget? Bingung? Atau malah nyesel karena disukai sama aku? HAHAHA.</p>
-   <p>Aku sih bodo amat ya, mau responmu gimana, itu hak kamu. But I want to tell you how much I love you.</p>
-   <p>Mungkin kedengarannya sederhana, kayak yaudah, cuma sebuah kalimat <em>I love you</em> doang, yekan? Tapi sebenarnya ada banyak hal yang ingin aku ceritakan...</p>
-  </article>
-  <div class="footer-nav"><span class="page-count">02 / 05</span><button class="btn" onclick="go(3)">NEXT CHAPTER →</button></div>
-  <span class="doodle d1">♡</span><span class="doodle d2">✧</span>
- </div>
-</section>
+<!-- PAGE 1 -->
+<section class="screen" id="page1">
+  <div class="screen-inner paper chapter">
 
-<section class="screen" data-page="3">
- <div class="frame">
-  <div class="topline"><span><i class="dot"></i>CHAPTER 03</span><span>YOU MEAN MORE THAN YOU KNOW</span></div>
-  <article class="letter">
-   <div class="eyebrow">SOMETHING I HOPE YOU KNOW</div>
-   <h2>You Mean More Than You Know</h2>
-   <p class="opening">“Mungkin kamu nggak sadar, tapi kehadiranmu berarti banyak buat aku.”</p>
-   <p>Aku nggak tahu apakah kamu sadar atau enggak, kalau sebenarnya kamu itu bikin aku berpikir lebih jauh. Kamu juga bikin aku belajar kalau nggak semua hal harus dibawa ribet.</p>
-   <p>Aku senang banget bisa kenal sama kamu. Senang bisa mendengar cerita-cerita kamu, melihat kamu berusaha dengan segala hal yang sedang kamu jalani, dan menjadi seseorang yang sedikit banyak tahu tentang hari-harimu.</p>
-   <p>Buat aku, kamu bukan cuma seseorang yang aku suka. Kamu juga seseorang yang keberadaannya sangat aku butuhkan.</p>
-   <p>Kamu mengajarkan aku kalau trauma bukan berarti kita lemah. Justru dari hal-hal yang pernah kita lalui, kita bisa belajar untuk tumbuh dan menjadi lebih kuat.</p>
-   <p>Aku nggak berharap harus selalu jadi bagian dari setiap harimu. Tapi kalau suatu saat kamu butuh seseorang untuk mendengarkan, menemani, atau sekadar ada di sampingmu, aku ingin kamu tahu kalau aku bersedia.</p>
-   <p>Karena melihat kamu tumbuh, berproses, dan sampai ke hal-hal yang kamu impikan adalah sesuatu yang juga ingin aku saksikan.</p>
-  </article>
-  <div class="footer-nav"><span class="page-count">03 / 05</span><button class="btn" onclick="go(4)">NEXT CHAPTER →</button></div>
-  <span class="doodle d1">✧</span><span class="doodle d2">♡</span>
- </div>
-</section>
+    <div class="chapter-top">
+      <span class="chapter-number">CHAPTER 01 / 05</span>
+      <span class="chapter-label">A LITTLE INTRODUCTION</span>
+    </div>
 
-<section class="screen" data-page="4">
- <div class="frame">
-  <div class="topline"><span><i class="dot"></i>CHAPTER 04</span><span>A LITTLE REMINDER</span></div>
-  <article class="letter">
-   <div class="eyebrow">PLEASE REMEMBER THIS</div>
-   <h2>You Are Enough, Always</h2>
-   <p class="opening">“Jangan terlalu keras sama diri kamu sendiri, ya. Kamu jauh lebih berharga dari apa yang selama ini kamu pikirkan.”</p>
-   <p>Aku tahu mungkin ada saatnya kamu merasa kurang. Merasa nggak cukup baik, merasa tertinggal, atau bahkan mempertanyakan kemampuan diri sendiri.</p>
-   <p>Tapi boleh nggak, kali ini kamu percaya sama apa yang aku lihat dari kamu?</p>
-   <p>Menurut aku, kamu itu hebat. Bukan karena kamu harus selalu berhasil, bukan karena kamu harus selalu terlihat kuat, dan bukan juga karena kamu nggak pernah melakukan kesalahan.</p>
-   <p>Aku suka kamu dengan segala kurang dan lebihmu. Kamu nggak perlu menjadi orang lain hanya supaya terlihat lebih baik. Kamu juga nggak perlu membuktikan apa-apa ke semua orang.</p>
-   <p>Kalau suatu saat kamu mulai meragukan diri sendiri, ingat kalau ada aku yang percaya sama kamu. Aku mungkin nggak selalu punya jawaban untuk semua masalahmu, tapi aku mau jadi seseorang yang bisa kamu datangi ketika dunia terasa terlalu berat.</p>
-   <div class="note">Jangan insecure sendirian, ya. Kamu punya aku. Aku mungkin nggak bisa menghilangkan semua keraguanmu, tapi aku bisa mengingatkan kamu berkali-kali kalau kamu itu berharga.</div>
-   <div class="quote">“You don't have to be perfect to be loved. You are enough, just as you are.”</div>
-  </article>
-  <div class="footer-nav"><span class="page-count">04 / 05</span><button class="btn" onclick="go(5)">ONE MORE THING →</button></div>
-  <span class="doodle d1">♡</span><span class="doodle d2">✧</span>
- </div>
-</section>
+    <h2 class="chapter-title">A Little Introduction</h2>
+    <p class="chapter-subtitle">Well, hello there! It's nice to have you here.</p>
 
-<section class="screen" data-page="5">
- <div class="frame">
-  <div class="topline"><span><i class="dot"></i>CHAPTER 05</span><span>UNTIL THE LAST PAGE</span></div>
-  <div class="end-card">
-   <div class="eyebrow">A FINAL LITTLE NOTE</div>
-   <h2>You're Never Alone</h2>
-   <p class="opening">“Kalau suatu hari dunia terasa terlalu berat, ingat ya, kamu nggak sendirian.”</p>
-   <p>Aku tahu aku nggak selalu bisa ada di samping kamu setiap waktu. Aku juga nggak bisa menjanjikan kalau semuanya akan selalu baik-baik saja.</p>
-   <p>Tapi satu hal yang ingin aku pastikan, kamu nggak harus menghadapi semuanya sendirian.</p>
-   <p>Kalau kamu capek, istirahatlah. Kalau kamu sedih, nggak apa-apa untuk cerita. Kalau kamu merasa dunia sedang nggak berpihak sama kamu, kamu boleh datang dan bersandar sebentar.</p>
-   <p>Aku ingin menemani kamu dalam setiap prosesnya. Bukan cuma ketika kamu sedang bahagia dan semuanya berjalan sesuai rencana, tetapi juga ketika kamu sedang jatuh, bingung, atau bahkan belum tahu harus melangkah ke mana.</p>
-   <p>Aku bangga sama kamu, bahkan untuk hal-hal kecil yang mungkin nggak pernah kamu ceritakan kepada siapa pun.</p>
-   <p>Jadi, jangan merasa sendirian, ya?</p>
-   <div class="big">You are not alone.<br><em>You have me.</em></div>
-   <p>Dan kalau suatu saat kamu lupa betapa berharganya dirimu, aku akan dengan senang hati mengingatkanmu lagi.</p>
-   <div class="signature">With all my love,<br>someone who is really happy to have you. ♡</div>
-   <div style="margin-top:34px"><button class="btn light" onclick="go(0)">BACK TO THE BEGINNING ↺</button></div>
-   <p class="eyebrow" style="margin-top:35px">THANK YOU FOR BEING YOU, OKYY JELLY DRINK.</p>
+    <div class="intro-layout">
+      <div class="intro-copy">
+        <p class="hello">Hiiii, Okyy Jelly Drink!</p>
+
+        <p>
+          Welcome to my little website ♡
+        </p>
+
+        <p>
+          Don't worry, this isn't an assignment. You don't have
+          to think too hard, and there's no deadline either.
+          Just sit back, relax, and enjoy this little thing
+          I've made for you.
+        </p>
+
+        <p>
+          Soo... are you ready to explore? I hope you like it!
+        </p>
+
+        <p class="hand" style="font-size:25px;color:#777">
+          Enjoy your little journey here :)
+        </p>
+      </div>
+
+      <div class="illustration-card">
+        <div class="illustration-art">
+          <span class="doodle one">♡</span>
+          <span class="doodle two">✦</span>
+          <span class="doodle three">☆</span>
+
+          <div class="couple">
+            <div class="person girl">
+              <div class="hair"></div>
+              <div class="head"></div>
+              <div class="eye"></div>
+              <div class="eye right"></div>
+              <div class="smile"></div>
+              <div class="body"></div>
+            </div>
+
+            <div class="person boy">
+              <div class="hair"></div>
+              <div class="head"></div>
+              <div class="eye"></div>
+              <div class="eye right"></div>
+              <div class="smile"></div>
+              <div class="body"></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="polaroid-caption">a little hello from me ♡</div>
+      </div>
+    </div>
+
+    <div class="chapter-footer">
+      <span class="footer-note">SCROLL, SMILE, AND TAKE YOUR TIME.</span>
+      <button class="nav-button" onclick="goTo('page2')">
+        LET'S EXPLORE! →
+      </button>
+    </div>
+
   </div>
-  <span class="doodle d1">♡</span><span class="doodle d2">✧</span><span class="doodle d3">♡</span>
- </div>
 </section>
-</div>
+
+<!-- PAGE 2 -->
+<section class="screen" id="page2">
+  <div class="screen-inner paper chapter">
+
+    <div class="chapter-top">
+      <span class="chapter-number">CHAPTER 02 / 05</span>
+      <span class="chapter-label">A LITTLE CONFESSION</span>
+    </div>
+
+    <h2 class="chapter-title">A Little Thing I Want You to Know</h2>
+    <p class="chapter-subtitle">Some things are better said than kept inside.</p>
+
+    <div class="confession">
+      <div class="confession-copy">
+
+        <p>Jadi… ada sesuatu yang ingin aku kasih tahu.</p>
+
+        <div class="big-confession">Aku suka sama kamu.</div>
+
+        <p>
+          Kaget? Bingung? Atau malah nyesel karena disukai sama
+          aku? HAHAHA.
+        </p>
+
+        <p>
+          Aku sih bodo amat ya, mau responmu gimana, itu hak kamu.
+          But I want to tell you how much I love you.
+        </p>
+
+        <p>
+          Mungkin kedengarannya sederhana, kayak yaudah, cuma
+          sebuah kalimat <i>I love you</i> doang, yekan?
+          Tapi sebenarnya ada banyak hal yang ingin aku ceritakan...
+        </p>
+
+        <div class="tiny-note">
+          "Sometimes, the simplest words carry the biggest feelings."
+        </div>
+      </div>
+
+      <div class="scrap-photo">
+        <div class="photo-art">♡</div>
+        <p>a little piece of my heart</p>
+      </div>
+    </div>
+
+    <div class="chapter-footer">
+      <span class="footer-note">A CONFESSION, JUST FOR YOU.</span>
+      <button class="nav-button" onclick="goTo('page3')">
+        NEXT CHAPTER →
+      </button>
+    </div>
+
+  </div>
+</section>
+
+<!-- PAGE 3 -->
+<section class="screen" id="page3">
+  <div class="screen-inner paper chapter">
+
+    <div class="chapter-top">
+      <span class="chapter-number">CHAPTER 03 / 05</span>
+      <span class="chapter-label">YOU MEAN MORE THAN YOU KNOW</span>
+    </div>
+
+    <h2 class="chapter-title">You Mean More Than You Know</h2>
+    <p class="chapter-subtitle">A few words that I've been wanting to tell you.</p>
+
+    <div class="letter">
+
+      <div class="letter-quote">
+        "Mungkin kamu nggak sadar, tapi kehadiranmu berarti
+        banyak buat aku."
+      </div>
+
+      <p>
+        Aku nggak tahu apakah kamu sadar atau enggak, kalau
+        sebenarnya kamu itu bikin aku berpikir lebih jauh.
+        Kamu juga bikin aku belajar kalau nggak semua hal
+        harus dibawa ribet.
+      </p>
+
+      <p>
+        Aku senang banget bisa kenal sama kamu. Senang bisa
+        mendengar cerita-cerita kamu, melihat kamu berusaha
+        dengan segala hal yang sedang kamu jalani, dan menjadi
+        seseorang yang sedikit banyak tahu tentang hari-harimu.
+      </p>
+
+      <p>
+        Buat aku, kamu bukan cuma seseorang yang aku suka.
+        Kamu juga seseorang yang keberadaannya sangat aku butuhkan.
+      </p>
+
+      <p class="highlight-paragraph">
+        Kamu mengajarkan aku kalau trauma bukan berarti kita lemah.
+        Justru dari hal-hal yang pernah kita lalui, kita bisa
+        belajar untuk tumbuh dan menjadi lebih kuat.
+      </p>
+
+      <p>
+        Aku nggak berharap harus selalu jadi bagian dari setiap
+        harimu. Tapi kalau suatu saat kamu butuh seseorang untuk
+        mendengarkan, menemani, atau sekadar ada di sampingmu,
+        aku ingin kamu tahu kalau aku bersedia.
+      </p>
+
+      <p>
+        Karena melihat kamu tumbuh, berproses, dan sampai ke
+        hal-hal yang kamu impikan adalah sesuatu yang juga ingin
+        aku saksikan.
+      </p>
+
+      <div class="letter-sign">with care, ♡</div>
+
+    </div>
+
+    <div class="chapter-footer">
+      <span class="footer-note">A PAGE FULL OF APPRECIATION.</span>
+      <button class="nav-button" onclick="goTo('page4')">
+        NEXT CHAPTER →
+      </button>
+    </div>
+
+  </div>
+</section>
+
+<!-- PAGE 4 -->
+<section class="screen" id="page4">
+  <div class="screen-inner paper chapter">
+
+    <div class="chapter-top">
+      <span class="chapter-number">CHAPTER 04 / 05</span>
+      <span class="chapter-label">YOU ARE ENOUGH, ALWAYS</span>
+    </div>
+
+    <h2 class="chapter-title">You Are Enough, Always</h2>
+    <p class="chapter-subtitle">A little reminder, whenever you need one.</p>
+
+    <div class="comfort-layout">
+
+      <div class="comfort-copy">
+
+        <p>
+          <i>
+            "Jangan terlalu keras sama diri kamu sendiri, ya.
+            Kamu jauh lebih berharga dari apa yang selama ini
+            kamu pikirkan."
+          </i>
+        </p>
+
+        <p>
+          Aku tahu mungkin ada saatnya kamu merasa kurang.
+          Merasa nggak cukup baik, merasa tertinggal, atau bahkan
+          mempertanyakan kemampuan diri sendiri.
+        </p>
+
+        <p>
+          Tapi boleh nggak, kali ini kamu percaya sama apa yang
+          aku lihat dari kamu?
+        </p>
+
+        <p>
+          Menurut aku, kamu itu hebat. Bukan karena kamu harus
+          selalu berhasil, bukan karena kamu harus selalu terlihat
+          kuat, dan bukan juga karena kamu nggak pernah melakukan
+          kesalahan.
+        </p>
+
+        <p>
+          Aku suka kamu dengan segala kurang dan lebihmu.
+          Kamu nggak perlu menjadi orang lain hanya supaya
+          terlihat lebih baik. Kamu juga nggak perlu membuktikan
+          apa-apa ke semua orang.
+        </p>
+
+        <p>
+          Kalau suatu saat kamu mulai meragukan diri sendiri,
+          ingat kalau ada aku yang percaya sama kamu.
+          Aku mungkin nggak selalu punya jawaban untuk semua
+          masalahmu, tapi aku mau jadi seseorang yang bisa kamu
+          datangi ketika dunia terasa terlalu berat.
+        </p>
+
+      </div>
+
+      <div class="comfort-visual">
+        <div class="comfort-illustration">♡</div>
+        <div class="comfort-caption">
+          I'm always rooting for you.
+        </div>
+      </div>
+
+    </div>
+
+    <div class="reminder">
+      <div class="reminder-title">A LITTLE REMINDER</div>
+      <h3>YOU ARE ENOUGH.</h3>
+      <p>
+        Jangan insecure sendirian, ya. Kamu punya aku.
+        Aku mungkin nggak bisa menghilangkan semua keraguanmu,
+        tapi aku bisa mengingatkan kamu berkali-kali kalau
+        kamu itu berharga.
+      </p>
+    </div>
+
+    <p style="text-align:center;margin-top:25px;font-family:'Playfair Display',serif;font-style:italic;color:#777;font-size:17px">
+      "You don't have to be perfect to be loved.
+      You are enough, just as you are."
+    </p>
+
+    <div class="chapter-footer">
+      <span class="footer-note">PLEASE BE KIND TO YOURSELF.</span>
+      <button class="nav-button" onclick="goTo('page5')">
+        ONE LAST THING →
+      </button>
+    </div>
+
+  </div>
+</section>
+
+<!-- PAGE 5 -->
+<section class="screen" id="page5">
+  <div class="screen-inner paper chapter">
+
+    <div class="chapter-top">
+      <span class="chapter-number">CHAPTER 05 / 05</span>
+      <span class="chapter-label">YOU'RE NEVER ALONE</span>
+    </div>
+
+    <div class="final-content">
+
+      <h2 class="chapter-title">You're Never Alone</h2>
+
+      <div class="final-quote">
+        "Kalau suatu hari dunia terasa terlalu berat,
+        ingat ya, kamu nggak sendirian."
+      </div>
+
+      <div class="divider"></div>
+
+      <p>
+        Aku tahu aku nggak selalu bisa ada di samping kamu
+        setiap waktu. Aku juga nggak bisa menjanjikan kalau
+        semuanya akan selalu baik-baik saja.
+      </p>
+
+      <p>
+        Tapi satu hal yang ingin aku pastikan, kamu nggak harus
+        menghadapi semuanya sendirian.
+      </p>
+
+      <p>
+        Kalau kamu capek, istirahatlah. Kalau kamu sedih,
+        nggak apa-apa untuk cerita. Kalau kamu merasa dunia
+        sedang nggak berpihak sama kamu, kamu boleh datang
+        dan bersandar sebentar.
+      </p>
+
+      <p>
+        Aku ingin menemani kamu dalam setiap prosesnya.
+        Bukan cuma ketika kamu sedang bahagia dan semuanya
+        berjalan sesuai rencana, tetapi juga ketika kamu
+        sedang jatuh, bingung, atau bahkan belum tahu harus
+        melangkah ke mana.
+      </p>
+
+      <p>
+        Aku bangga sama kamu, bahkan untuk hal-hal kecil
+        yang mungkin nggak pernah kamu ceritakan kepada
+        siapa pun.
+      </p>
+
+      <p>Jadi, jangan merasa sendirian, ya?</p>
+
+      <div class="final-message">
+        <h2>You are not alone.</h2>
+        <h2>You have me.</h2>
+        <div class="always">ALWAYS. ♡</div>
+      </div>
+
+      <p>
+        Dan kalau suatu saat kamu lupa betapa berharganya
+        dirimu, aku akan dengan senang hati mengingatkanmu lagi.
+      </p>
+
+      <div class="signature">
+        With all my love,<br>
+        someone who is really happy to have you. ♡
+      </div>
+
+      <div class="last-line">
+        THANK YOU FOR BEING YOU, OKYY JELLY DRINK.
+      </div>
+
+      <button class="nav-button" onclick="goTo('opening')">
+        BACK TO THE BEGINNING ↺
+      </button>
+
+    </div>
+
+  </div>
+</section>
+
 <script>
-let current=0, busy=false;
-function go(next){
- if(busy||next===current)return;
- const pages=[...document.querySelectorAll('.screen')];
- const old=pages[current], target=pages[next];
- busy=true;
- old.classList.add('leaving');
- setTimeout(()=>{
-  old.classList.remove('active','leaving');
-  target.classList.add('active');
-  target.scrollTop=0;
-  current=next;
-  setTimeout(()=>busy=false,760);
- },390);
+const transitionLayer = document.getElementById('transition');
+let isTransitioning = false;
+
+function goTo(targetId) {
+  if (isTransitioning) return;
+
+  const current = document.querySelector('.screen.active');
+  const target = document.getElementById(targetId);
+
+  if (!target || current === target) return;
+
+  isTransitioning = true;
+
+  // Efek layar film menjadi gelap sebentar
+  transitionLayer.classList.add('show');
+
+  setTimeout(() => {
+    current.classList.remove('active');
+
+    target.style.display = 'flex';
+    target.scrollTop = 0;
+
+    requestAnimationFrame(() => {
+      target.classList.add('active');
+    });
+
+    setTimeout(() => {
+      transitionLayer.classList.remove('show');
+
+      setTimeout(() => {
+        isTransitioning = false;
+      }, 400);
+
+    }, 250);
+
+  }, 350);
 }
+
+// Pastikan halaman pertama selalu tampil saat website dibuka
+window.addEventListener('load', () => {
+  document.querySelectorAll('.screen').forEach(screen => {
+    if (!screen.classList.contains('active')) {
+      screen.style.display = 'none';
+    }
+  });
+});
 </script>
+
 </body>
 </html>
